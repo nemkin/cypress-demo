@@ -1,0 +1,36 @@
+version: "3.9"
+services:
+  cypress.demo.api:
+    build:
+      context: .
+      dockerfile: CypressDemo.Api\Dockerfile
+    ports:
+      - "5000:44319"
+    networks:
+      - cypress.demo.network
+  cypress.demo.mongo:
+    image: mongo:4.4-bionic
+    ports: 
+      - "27017:27017"
+    networks:
+      - cypress.demo.network
+    restart: always
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongo localhost:27017/test --quiet
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
+  cypress.demo.mongoclient:
+    image: mongoclient/mongoclient
+    ports:
+      - "3000:3000"
+    networks:
+      - cypress.demo.network
+    depends_on:
+      cypress.demo.mongo:
+        condition: service_healthy
+    environment:
+      - MONGOCLIENT_DEFAULT_CONNECTION_URL=mongodb://cypress.demo.mongo:27017/test
+networks:
+  cypress.demo.network:

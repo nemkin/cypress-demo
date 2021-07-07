@@ -1,0 +1,30 @@
+<h1 mat-dialog-title>Todo</h1>
+<div mat-dialog-content class="main">
+  <form>
+    <mat-form-field appearance="fill">
+      <mat-label>Title</mat-label>
+      <input matInput [formControl]="formControls.title" />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Description</mat-label>
+      <input matInput [formControl]="formControls.description" />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Deadline</mat-label>
+      <input
+        matInput
+        [matDatepicker]="picker"
+        [formControl]="formControls.deadline"
+      />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-checkbox [formControl]="formControls.isCompleted">
+      Completed
+    </mat-checkbox>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="cancel()">Cancel</button>
+  <button mat-button (click)="submit()" cdkFocusInitial>Ok</button>
+</div>
