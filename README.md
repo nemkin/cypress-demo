@@ -2,6 +2,9 @@
 
 Egy egyszerű Todo listát kezelő alkalmazás a Cypress bemutatásához.
 
+A Cypress-es tesztkód itt található:
+[frontend/e2e/cypress/integration/cypress-demo.spec.ts](frontend/e2e/cypress/integration/cypress-demo.spec.ts)
+
 ## Backend
 
 A backendet .NET Core-ban írtam, a [backend/docker-compose.yaml](backend/docker-compose.yaml)
